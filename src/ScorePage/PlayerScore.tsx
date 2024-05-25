@@ -10,27 +10,25 @@ import {
  import { PlayerScoresData, PlayerId } from './types';
 
 
-interface PlayerScoreProps {
+ interface PlayerScoreProps {
     playerName: string;
-    handleNameSubmit: (name: string, playerId: PlayerId) => void;
-    updateScore: (score: number, playerId: PlayerId) => void;
     totalScore: number;
+    handleNameSubmit: (name: string, playerId: PlayerId) => void;
+    updateScore: (scoreClass: string, playerId: PlayerId) => void;
     playerId: PlayerId;
     showNameForm: boolean;
-    setShowNameForm: (value: boolean) => void;
-    playerScores: PlayerScoresData;
-};
+    setShowNameForm: React.Dispatch<React.SetStateAction<boolean>>;
+    playerScores: PlayerScoresData; // Make sure this property is declared in the interface
+}
 
 const PlayerScore: React.FC<PlayerScoreProps> = ({ playerName, playerScores, handleNameSubmit, updateScore, playerId, showNameForm, setShowNameForm }) => {
-   
-   console.log("PlayerScore  playerScores = ", playerScores);
    
     return (
         <div className="score-column">
             <Grid container spacing={2} style={{display: 'flex', alignItems: 'center'}}>
                 <Grid item xs={10}>
                 {!showNameForm && (
-                    <h3>{playerName}&apos;s Score</h3>
+                    <h3>{playerName}&apos;s Score: {playerScores[playerId].totalScore}</h3>
                 )}
 
                 {showNameForm && (
@@ -44,8 +42,9 @@ const PlayerScore: React.FC<PlayerScoreProps> = ({ playerName, playerScores, han
                 </Grid>
             </Grid>
 
+
             <Grid>
-                <Grid>
+                {/*<Grid>
                     <Button 
                         variant="contained" 
                         color="primary" 
@@ -54,7 +53,7 @@ const PlayerScore: React.FC<PlayerScoreProps> = ({ playerName, playerScores, han
                     >
                         Add 10 to {playerName}
                     </Button>
-                </Grid>
+            </Grid> */}
                 <ScoreInput player={playerId} updateScore={updateScore} />
             </Grid>
         <div style={{textAlign: 'left'}}>

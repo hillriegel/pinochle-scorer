@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Grid, Input, Box, InputLabel, MenuItem, FormControl, Select, Button } from '@mui/material';
+import { Grid, Box, InputLabel, MenuItem, FormControl, Select, Button } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 
 import { PlayerId } from './types';
 
 interface ScoreInputProps {
-    updateScore: (score: number, playerId: PlayerId) => void;
+    updateScore: (scoreClass: string, playerId: PlayerId) => void;
     player: PlayerId; 
 }
 
@@ -14,17 +14,17 @@ const ScoreInput: React.FC<ScoreInputProps> = ({ updateScore, player }) => {
     const [selectedOption, setSelectedOption] = useState('');
 
     const scoringOptions = [
-        { label: 'Show Dix (10)', value: 10 },
-        { label: 'Royal Marriage (40)', value: 40 },
-        { label: 'Peasant Marriage (20)', value: 20 },
-        { label: 'Pinochle (40)', value: 40 },
-        { label: 'Double Pinochle (300)', value: 300 },
-        { label: 'Aces Around (100)', value: 100 },
-        { label: 'Kings Around (80)', value: 80 },
-        { label: 'Queens Around (60)', value: 60 },
-        { label: 'Jacks Around (40)', value: 40 },
-        { label: 'Run (150)', value: 150 },
-        { label: 'Double Run (1500)', value: 1500 },
+        { label: 'Show Dix (10)', value: 'Show Dix' },
+        { label: 'Royal Marriage (40)', value: 'Royal Marriage' },
+        { label: 'Common Marriage (20)', value: 'Common Marriage' },
+        { label: 'Pinochle (40)', value: "Pinochle" },
+        { label: 'Double Pinochle (300)', value: 'Double Pinochle' },
+        { label: 'Aces Around (100)', value: 'Aces Around' },
+        { label: 'Kings Around (80)', value: 'Kings Around' },
+        { label: 'Queens Around (60)', value: 'Queens Around' },
+        { label: 'Jacks Around (40)', value: 'Jacks Around' },
+        { label: 'Run (150)', value: 'Run' },
+        { label: 'Double Run (1500)', value: 'Double Run' },
     ];
 
     const handleSelectChange = (event: SelectChangeEvent) => {
@@ -33,15 +33,11 @@ const ScoreInput: React.FC<ScoreInputProps> = ({ updateScore, player }) => {
         setAdd(value);
     };
 
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setAdd(event.target.value);
-    }
-
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     
         if (add) {
-            updateScore( Number(add), player);
+            updateScore( selectedOption, player);
             setAdd('');
             setSelectedOption(''); // Reset selected option after submitting
         }
@@ -70,15 +66,6 @@ const ScoreInput: React.FC<ScoreInputProps> = ({ updateScore, player }) => {
                                     ))}
                                 </Select>
                             </FormControl>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <Input
-                                type="number"
-                                id="score-input"
-                                value={add}
-                                onChange={handleInputChange}
-                                fullWidth
-                            />
                         </Grid>
                         <Grid item xs={3}>
                             <Button variant="outlined" type="submit">Add Score</Button>

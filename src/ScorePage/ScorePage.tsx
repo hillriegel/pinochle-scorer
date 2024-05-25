@@ -1,7 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PlayerScore from './PlayerScore';  // Ensure this is the correct import
 import { Grid } from '@mui/material';
 import { PlayerScoresData, PlayerId} from './types';
+
+
+const classPoints = {
+    'Show Dix': 10,
+    'Royal Marriage': 40,
+    'Common Marriage': 20,
+    'Pinochle': 40,
+    'Double Pinochle': 300,
+    'Aces Around': 100,
+    'Kings Around': 80,
+    'Queens Around':60,
+    'Jacks Around': 40 ,
+    'Run (150)': 150,
+    'Double Run': 1500,
+};
 
 
 function ScorePage() {
@@ -21,13 +36,36 @@ function ScorePage() {
         }));
     };
 
-    const updateScore = (points: number, playerId: PlayerId) => {
-        setPlayerScores(prevScores => ({
-            ...prevScores,
-            [playerId]: { ...prevScores[playerId], totalScore: prevScores[playerId].totalScore + points }
-        }));
+    const isValidClass = (key: any): key is keyof typeof classPoints => {
+        return key in classPoints;
     };
 
+    const updateScore = (scoreClass: string, playerId: PlayerId) => {
+        console.log("updateScore ", scoreClass);
+        if (isValidClass(scoreClass)) {
+            setPlayerScores(prevScores => {
+                const updatedScores = { ...prevScores };
+                const currentList = [...updatedScores[playerId].scoreList];
+                const scoreIndex = currentList.findIndex(item => item.class === scoreClass);
+        
+                if (scoreIndex !== -1) {
+                    currentList[scoreIndex] = {
+                        ...currentList[scoreIndex],
+                        points: currentList[scoreIndex].points + classPoints[scoreClass]
+                    };
+                } else {
+                    currentList.push({ class: scoreClass, points: classPoints[scoreClass] });
+                }
+                updatedScores[playerId].totalScore = updatedScores[playerId].totalScore + classPoints[scoreClass];
+                updatedScores[playerId].scoreList = currentList;
+                return updatedScores;
+            });
+           
+        } else {
+            console.error(`Invalid score class: ${scoreClass}`);
+        }
+    };
+    
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
