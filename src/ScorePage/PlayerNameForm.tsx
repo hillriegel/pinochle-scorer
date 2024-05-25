@@ -1,13 +1,19 @@
 import React, { useState } from 'react';
 import { Input, Button } from '@mui/material';
+import { PlayerId } from './types';
 
-export default function PlayerNameForm({ onNameSubmit }) {
+interface PlayerNameFormProps {
+    playerId: PlayerId;
+    handleNameSubmit: (name: string, playerId: PlayerId) => void;
+}
+
+const PlayerNameForm: React.FC<PlayerNameFormProps> = ({ playerId, handleNameSubmit }) => {
     const [playerName, setPlayerName] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         if (playerName.trim()) {
-            onNameSubmit(playerName);  // Lifting the state up to the parent component
+            handleNameSubmit(playerName, playerId);  // Lifting the state up to the parent component
             setPlayerName('');  // Optionally clear the input field after submission
         }
     };
@@ -15,7 +21,7 @@ export default function PlayerNameForm({ onNameSubmit }) {
     return (
         <div style={{margin: '18px'}}>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="playerName">Player Name: </label>
+    
             <Input
                 type="text"
                 id="playerName"
@@ -23,9 +29,11 @@ export default function PlayerNameForm({ onNameSubmit }) {
                 onChange={(e) => setPlayerName(e.target.value)}
                 placeholder="Enter player's name"
                 required
-            />
-            <Button type="submit">Set Name</Button>
+            /> &nbsp;
+            <Button type="submit" variant="outlined">Set Name</Button>
         </form>
         </div>
     );
 }
+
+export default PlayerNameForm;
