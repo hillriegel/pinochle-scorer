@@ -28,15 +28,34 @@ body {
   background-size: var(--s) calc(2*var(--s)/3);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 .header {
   background-color: #5601a1;
   color: #ddaeee;
-  padding: 5px;
+  padding: 0px;
+  font-family: "Platypi", serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #4158D0;
+  background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+
+}
+
+.page-title {
+  flex-grow: 3;
+  text-align: center;
+}
+
+.reset-button {
+  flex-grow: 0;
+  width: 50px;
+}
+
+h2 {
+  font-family: "Platypi", serif;
+}
+
+h3 {
   font-family: "Platypi", serif;
 }
 
@@ -46,4 +65,48 @@ code {
   padding: 20px;
   margin: 20px;
   box-shadow:  0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #D9AFD9;
+  background-image: linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%);
+
+}
+
+.melds {
+  background-color: #eaffa0;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow:  0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tricks {
+  background-color: #915aa9;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow:  0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+}
+
+.melds-accordian {
+  background-color: #efd2ef;
+  background-image: linear-gradient(0deg, #efd2ef 0%, #caedf5 100%);
+  
+}
+.meld-item {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #f8daf6;
+  padding: 10px;
+  margin: 5px;
+}
+
+.platy {
+  font-family: "Platypi", serif;
+}
+
+.plus-button {
+  background-color: #8EC5FC;
+  background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+  box-shadow:  0 2px 4px rgba(0, 0, 0, 0.5);
 }

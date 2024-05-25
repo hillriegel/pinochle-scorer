@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PlayerScore from './PlayerScore';  // Ensure this is the correct import
 import { Grid } from '@mui/material';
 import { PlayerScoresData, PlayerId} from './types';
+import Tricks from './Tricks';
 
 
 const classPoints = {
@@ -79,6 +80,8 @@ function ScorePage() {
                     setShowNameForm={setShowNameForm}
                     playerScores={playerScores}
                 />
+                <Tricks
+                    playerId={'player1'} />
             </Grid>
             <Grid item xs={12}  sm={6}>
                 <PlayerScore 
@@ -91,6 +94,8 @@ function ScorePage() {
                     setShowNameForm={setShowNameForm}
                     playerScores={playerScores}
                 />
+                <Tricks
+                    playerId={'player2'} />
             </Grid>
         </Grid>
     );

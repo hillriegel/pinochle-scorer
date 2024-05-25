@@ -8,6 +8,10 @@ import {
  } from '@mui/material';
 
  import { PlayerScoresData, PlayerId } from './types';
+ import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
  interface PlayerScoreProps {
@@ -44,27 +48,27 @@ const PlayerScore: React.FC<PlayerScoreProps> = ({ playerName, playerScores, han
 
 
             <Grid>
-                {/*<Grid>
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
-                        onClick={() => updateScore(10, playerId)}
-                        style={{width: '100%'}}
-                    >
-                        Add 10 to {playerName}
-                    </Button>
-            </Grid> */}
                 <ScoreInput player={playerId} updateScore={updateScore} />
             </Grid>
-        <div style={{textAlign: 'left'}}>
-            <ul>
-    {playerScores[playerId].scoreList.map((scoreItem, index) => (
-        <li key={index}>
-            <div>{scoreItem.class}: {scoreItem.points} points</div>
-        </li>
-    ))}
-</ul>
-</div>
+        <div style={{textAlign: 'left', padding: '20px'}}>
+        <Accordion className="melds-accordian">
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1-content"
+          id="panel1-header"
+        >
+       <h3>Melds</h3>
+       </AccordionSummary>
+       <AccordionDetails>
+            {playerScores[playerId].scoreList.map((scoreItem, index) => (
+            <div className="meld-item">
+                <Grid item xs={6}>{scoreItem.class}</Grid>
+                <Grid item xs={3} style={{textAlign: 'right'}}>{scoreItem.points}</Grid>
+            </div>
+            ))}
+            </AccordionDetails>
+            </Accordion>
+            </div>
 
 
         </div>

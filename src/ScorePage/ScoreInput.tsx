@@ -68,7 +68,7 @@ const ScoreInput: React.FC<ScoreInputProps> = ({ updateScore, player }) => {
                             </FormControl>
                         </Grid>
                         <Grid item xs={3}>
-                            <Button variant="outlined" type="submit">Add Score</Button>
+                            <Button className="plus-button" variant="outlined" type="submit">Add Score</Button>
                         </Grid>
                     </Grid>
                 </FormControl>
