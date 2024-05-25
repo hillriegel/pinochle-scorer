@@ -97,7 +97,8 @@ h3 {
   align-items: center;
   border-radius: 10px;
   background-color: #f8daf6;
-  padding: 10px;
+  padding: 5px;
+  padding-left: 20px;
   margin: 5px;
 }
 
@@ -109,4 +110,13 @@ h3 {
   background-color: #8EC5FC;
   background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
   box-shadow:  0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.delete-icon {
+  cursor: pointer;
+  margin-top: -20px;
+  color: #aaaaaa;
+  margin-right: 20px;
+  margin-left: 30px;
+  margin-bottom: 3px;
 }

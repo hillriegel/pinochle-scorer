@@ -12,7 +12,7 @@ import {
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
  interface PlayerScoreProps {
     playerName: string;
@@ -23,9 +23,19 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
     showNameForm: boolean;
     setShowNameForm: React.Dispatch<React.SetStateAction<boolean>>;
     playerScores: PlayerScoresData; // Make sure this property is declared in the interface
-}
+    deleteMeldItem: (playerId: PlayerId, scoreClass: string) => void;
+ }
 
-const PlayerScore: React.FC<PlayerScoreProps> = ({ playerName, playerScores, handleNameSubmit, updateScore, playerId, showNameForm, setShowNameForm }) => {
+const PlayerScore: React.FC<PlayerScoreProps> = ({ 
+    playerName, 
+    playerScores, 
+    handleNameSubmit, 
+    updateScore, 
+    playerId, 
+    showNameForm, 
+    setShowNameForm, 
+    deleteMeldItem 
+}) => {
    
     return (
         <div className="score-column">
@@ -50,23 +60,26 @@ const PlayerScore: React.FC<PlayerScoreProps> = ({ playerName, playerScores, han
             <Grid>
                 <ScoreInput player={playerId} updateScore={updateScore} />
             </Grid>
-        <div style={{textAlign: 'left', padding: '20px'}}>
-        <Accordion className="melds-accordian">
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-       <h3>Melds</h3>
-       </AccordionSummary>
-       <AccordionDetails>
-            {playerScores[playerId].scoreList.map((scoreItem, index) => (
-            <div className="meld-item">
-                <Grid item xs={6}>{scoreItem.class}</Grid>
-                <Grid item xs={3} style={{textAlign: 'right'}}>{scoreItem.points}</Grid>
-            </div>
-            ))}
-            </AccordionDetails>
+                <div style={{textAlign: 'left', padding: '20px'}}>
+                <Accordion className="melds-accordian">
+                <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1-content"
+                id="panel1-header"
+                >
+            <h3>Melds</h3>
+            </AccordionSummary>
+            <AccordionDetails>
+                    {playerScores[playerId].scoreList.map((scoreItem, index) => (
+                    <div className="meld-item">
+                        <Grid item xs={6}>{scoreItem.class}</Grid>
+                        <Grid item xs={4} style={{textAlign: 'right'}}>{scoreItem.points}</Grid>
+                        <Grid item xs={2}> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <DeleteIcon  onClick={() => deleteMeldItem(playerId, scoreItem.class)} className="delete-icon" />
+                    </Grid>
+                    </div>
+                    ))}
+                </AccordionDetails>
             </Accordion>
             </div>
 
