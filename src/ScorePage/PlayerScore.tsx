@@ -71,7 +71,7 @@ const PlayerScore: React.FC<PlayerScoreProps> = ({
             </AccordionSummary>
             <AccordionDetails>
                     {playerScores[playerId].scoreList.map((scoreItem, index) => (
-                    <div className="meld-item">
+                    <div key={index} className="meld-item">
                         <Grid item xs={6}>{scoreItem.class}</Grid>
                         <Grid item xs={4} style={{textAlign: 'right'}}>{scoreItem.points}</Grid>
                         <Grid item xs={2}> &nbsp; &nbsp; &nbsp; &nbsp;
