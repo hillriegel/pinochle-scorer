@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Grid, Box, InputLabel, MenuItem, FormControl, Select, Button } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
-
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import { PlayerId } from './types';
 
 interface ScoreInputProps {
@@ -68,7 +68,7 @@ const ScoreInput: React.FC<ScoreInputProps> = ({ updateScore, player }) => {
                             </FormControl>
                         </Grid>
                         <Grid item xs={3}>
-                            <Button className="plus-button" variant="outlined" type="submit">Add Score</Button>
+                            <Button className="plus-button" variant="outlined" type="submit"> <AutoAwesomeIcon /> Add</Button>
                         </Grid>
                     </Grid>
                 </FormControl>

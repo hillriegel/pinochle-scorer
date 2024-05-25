@@ -138,6 +138,8 @@ function ScorePage() {
     return (
         <div>
         <Header resetAll={resetAll}/>
+        <div className="body-container">
+
         <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
                 <PlayerScore
@@ -178,6 +180,8 @@ function ScorePage() {
                 />
             </Grid>
         </Grid>
+        
+        </div>
         </div>
     );
 }
