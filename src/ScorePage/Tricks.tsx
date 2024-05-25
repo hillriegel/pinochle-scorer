@@ -45,11 +45,12 @@ const Tricks: React.FC<TricksProps> = ({ playerId, handleIncrement, handleDecrem
                                 className="plus-button"
                                 variant="outlined"
                                 onClick={() => handleIncrement(cardType as keyof typeof cardPoints, playerId)}
+                                style={{width: '80px', fontWeight: 'bold'}}
                             >{cardType}
                             </Button>
                             </Grid>
                         <Grid item xs={2}>
-                            <Input inputProps={{ style: { textAlign: 'center', color: "#ffffff" } }} value={cardCounts[cardType as keyof typeof cardPoints]} readOnly />
+                            <Input inputProps={{ style: { fontSize: '1.5em', textAlign: 'center', color: "#ffffff" } }} value={cardCounts[cardType as keyof typeof cardPoints]} readOnly />
                         </Grid>
                         <Grid item xs={3}>
                             <Button
