@@ -14,6 +14,7 @@ const ScoreInput: React.FC<ScoreInputProps> = ({ updateScore, player }) => {
     const [selectedOption, setSelectedOption] = useState('');
 
     const scoringOptions = [
+        { label: 'Exchange Dix (10)', value: 'Exchange Dix' },
         { label: 'Show Dix (10)', value: 'Show Dix' },
         { label: 'Royal Marriage (40)', value: 'Royal Marriage' },
         { label: 'Common Marriage (20)', value: 'Common Marriage' },
@@ -23,8 +24,8 @@ const ScoreInput: React.FC<ScoreInputProps> = ({ updateScore, player }) => {
         { label: 'Kings Around (80)', value: 'Kings Around' },
         { label: 'Queens Around (60)', value: 'Queens Around' },
         { label: 'Jacks Around (40)', value: 'Jacks Around' },
-        { label: 'Run (150)', value: 'Run' },
-        { label: 'Double Run (1500)', value: 'Double Run' },
+        { label: 'Royal Flush (150)', value: 'Royal Flush' },
+        { label: 'Double Flush (1500)', value: 'Double Flush' },
     ];
 
     const handleSelectChange = (event: SelectChangeEvent) => {

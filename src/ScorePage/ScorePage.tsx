@@ -6,6 +6,7 @@ import Tricks from './Tricks';
 import Header from './Header';
 
 const classPoints = {
+    'Exchange Diz': 10,
     'Show Dix': 10,
     'Royal Marriage': 40,
     'Common Marriage': 20,
@@ -15,8 +16,8 @@ const classPoints = {
     'Kings Around': 80,
     'Queens Around': 60,
     'Jacks Around': 40,
-    'Run (150)': 150,
-    'Double Run': 1500,
+    'Royal Flush': 150,
+    'Double Flush': 1500,
 };
 
 const cardPoints = {
@@ -29,8 +30,8 @@ const cardPoints = {
 
 function ScorePage() {
     const initialPlayerScores: PlayerScoresData = {
-        player1: { name: "Paula", totalScore: 0, scoreList: [{ class: 'start', points: 0 }] },
-        player2: { name: "Joy", totalScore: 0, scoreList: [{ class: 'start', points: 0 }] }
+        player1: { name: "Paula", totalScore: 0, trickPoints: 0, scoreList: [{ class: 'start', points: 0 }] },
+        player2: { name: "Joy", totalScore: 0, trickPoints: 0, scoreList: [{ class: 'start', points: 0 }] }
     };
 
     const initialCardCounts = {
@@ -108,12 +109,12 @@ function ScorePage() {
         setPlayerScores(prevScores => {
             const updatedScores = { ...prevScores };
             updatedScores[playerId].totalScore += cardPoints[cardType];
+            updatedScores[playerId].trickPoints += cardPoints[cardType];
             return updatedScores;
         });
 
         setCardCounts(prevCounts => {
             const updatedCounts = { ...prevCounts };
-
             updatedCounts[playerId][cardType] ++;
             return updatedCounts;
         });
@@ -123,6 +124,7 @@ function ScorePage() {
         setPlayerScores(prevScores => {
             const updatedScores = { ...prevScores };
             updatedScores[playerId].totalScore -= cardPoints[cardType];
+            updatedScores[playerId].trickPoints -= cardPoints[cardType];
             return updatedScores;
         });
 
@@ -137,51 +139,51 @@ function ScorePage() {
 
     return (
         <div>
-        <Header resetAll={resetAll}/>
-        <div className="body-container">
-
-        <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-                <PlayerScore
-                    playerName={playerScores.player1.name}
-                    totalScore={playerScores.player1.totalScore}
-                    handleNameSubmit={handleNameSubmit}
-                    updateScore={updateScore}
-                    playerId='player1'
-                    showNameForm={showNameForm}
-                    setShowNameForm={setShowNameForm}
-                    playerScores={playerScores}
-                    deleteMeldItem={deleteMeldItem}
-                />
-                <Tricks
-                    playerId='player1'
-                    handleIncrement={handleIncrement}
-                    handleDecrement={handleDecrement}
-                    cardCounts={cardCounts.player1}
-                />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-                <PlayerScore
-                    playerName={playerScores.player2.name}
-                    totalScore={playerScores.player2.totalScore}
-                    handleNameSubmit={handleNameSubmit}
-                    updateScore={updateScore}
-                    playerId='player2'
-                    showNameForm={showNameForm}
-                    setShowNameForm={setShowNameForm}
-                    playerScores={playerScores}
-                    deleteMeldItem={deleteMeldItem}
-                />
-                <Tricks
-                    playerId='player2'
-                    handleIncrement={handleIncrement}
-                    handleDecrement={handleDecrement}
-                    cardCounts={cardCounts.player2} // Ensure correct cardCounts are passed
-                />
-            </Grid>
-        </Grid>
-        
-        </div>
+            <Header resetAll={resetAll}/>
+            <div className="body-container">
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={6}>
+                        <PlayerScore
+                            playerName={playerScores.player1.name}
+                            totalScore={playerScores.player1.totalScore}
+                            handleNameSubmit={handleNameSubmit}
+                            updateScore={updateScore}
+                            playerId='player1'
+                            showNameForm={showNameForm}
+                            setShowNameForm={setShowNameForm}
+                            playerScores={playerScores}
+                            deleteMeldItem={deleteMeldItem}
+                        />
+                        <Tricks
+                            playerId='player1'
+                            playerScores={playerScores.player1}
+                            handleIncrement={handleIncrement}
+                            handleDecrement={handleDecrement}
+                            cardCounts={cardCounts.player1}
+                        />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <PlayerScore
+                            playerName={playerScores.player2.name}
+                            totalScore={playerScores.player2.totalScore}
+                            handleNameSubmit={handleNameSubmit}
+                            updateScore={updateScore}
+                            playerId='player2'
+                            showNameForm={showNameForm}
+                            setShowNameForm={setShowNameForm}
+                            playerScores={playerScores}
+                            deleteMeldItem={deleteMeldItem}
+                        />
+                        <Tricks
+                            playerId='player2'
+                            playerScores={playerScores.player2}
+                            handleIncrement={handleIncrement}
+                            handleDecrement={handleDecrement}
+                            cardCounts={cardCounts.player2} // Ensure correct cardCounts are passed
+                        />
+                    </Grid>
+                </Grid>
+            </div>
         </div>
     );
 }

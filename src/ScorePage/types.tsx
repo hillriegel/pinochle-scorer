@@ -6,6 +6,7 @@ export interface ScoreItem {
 export interface PlayerScoreType {
     name: string;
     totalScore: number;
+    trickPoints: number;
     scoreList: ScoreItem[];
 }
 
