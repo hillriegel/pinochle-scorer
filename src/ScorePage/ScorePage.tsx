@@ -6,7 +6,7 @@ import Tricks from './Tricks';
 import Header from './Header';
 
 const classPoints = {
-    'Exchange Diz': 10,
+    'Exchange Dix': 10,
     'Show Dix': 10,
     'Royal Marriage': 40,
     'Common Marriage': 20,
