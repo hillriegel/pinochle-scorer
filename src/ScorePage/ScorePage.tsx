@@ -141,8 +141,8 @@ function ScorePage() {
         <div>
             <Header resetAll={resetAll}/>
             <div className="body-container">
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={6}>
+                <Grid container spacing={1}>
+                    <Grid item xs={12} sm={6} md={6}>
                         <PlayerScore
                             playerName={playerScores.player1.name}
                             totalScore={playerScores.player1.totalScore}
@@ -162,7 +162,7 @@ function ScorePage() {
                             cardCounts={cardCounts.player1}
                         />
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} sm={6} md={6}>
                         <PlayerScore
                             playerName={playerScores.player2.name}
                             totalScore={playerScores.player2.totalScore}

@@ -39,7 +39,7 @@ const PlayerScore: React.FC<PlayerScoreProps> = ({
    
     return (
         <div className="score-column">
-            <Grid container spacing={2} style={{display: 'flex', alignItems: 'center'}}>
+            <Grid container spacing={1} style={{display: 'flex', alignItems: 'center'}}>
                 <Grid item xs={10}>
                 {!showNameForm && (
                     <h3>{playerName}&apos;s Score: {playerScores[playerId].totalScore}</h3>
@@ -61,27 +61,27 @@ const PlayerScore: React.FC<PlayerScoreProps> = ({
                 <ScoreInput player={playerId} updateScore={updateScore} />
             </Grid>
                 <div style={{textAlign: 'left', padding: '20px'}}>
-                <Accordion className="melds-accordian">
-                <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1-content"
-                id="panel1-header"
-                >
-            <h3>Melds</h3>
-            </AccordionSummary>
-            <AccordionDetails>
-                    {playerScores[playerId].scoreList.map((scoreItem, index) => (
-                    <div key={index} className="meld-item">
-                        <Grid item xs={6}>{scoreItem.class}</Grid>
-                        <Grid item xs={4} style={{textAlign: 'right'}}>{scoreItem.points}</Grid>
-                        <Grid item xs={2}> &nbsp; &nbsp; &nbsp; &nbsp;
-                        <DeleteIcon  onClick={() => deleteMeldItem(playerId, scoreItem.class)} className="delete-icon" />
-                    </Grid>
-                    </div>
-                    ))}
-                </AccordionDetails>
-            </Accordion>
-            </div>
+                    <Accordion className="melds-accordian">
+                    <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                    >
+                    <h3>Melds</h3>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                            {playerScores[playerId].scoreList.map((scoreItem, index) => (
+                            <div key={index} className="meld-item">
+                                <Grid item xs={6}>{scoreItem.class}</Grid>
+                                <Grid item xs={4} style={{textAlign: 'right'}}>{scoreItem.points}</Grid>
+                                <Grid item xs={2}> &nbsp; &nbsp; &nbsp; &nbsp;
+                                <DeleteIcon  onClick={() => deleteMeldItem(playerId, scoreItem.class)} className="delete-icon" />
+                            </Grid>
+                            </div>
+                            ))}
+                        </AccordionDetails>
+                    </Accordion>
+                </div>
 
 
         </div>
