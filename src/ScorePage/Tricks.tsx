@@ -54,9 +54,11 @@ const Tricks: React.FC<TricksProps> = ({ playerId, handleIncrement, handleDecrem
                         </Grid>
                         <Grid item xs={3}>
                             <Button
-                                className="plus-button"
+                                className={`plus-button ${cardCounts[cardType as keyof typeof cardPoints] === 0 ? 'disabled' : ''}`}
                                 variant="outlined"
                                 onClick={() => handleDecrement(cardType as keyof typeof cardPoints, playerId)}
+                                disabled={cardCounts[cardType as keyof typeof cardPoints] === 0}
+                                
                             >
                                 <RemoveIcon />
                             </Button>

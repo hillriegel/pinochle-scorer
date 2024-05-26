@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import PlayerScore from './PlayerScore'; // Ensure this is the correct import
 import { Grid } from '@mui/material';
 import { PlayerScoresData, PlayerId } from './types';
