@@ -7,7 +7,7 @@ import {
     Button,
  } from '@mui/material';
 
- import { PlayerScoresData, PlayerId } from './types';
+ import { PlayerScoreType, PlayerId } from './types';
  import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -15,19 +15,16 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 
  interface PlayerScoreProps {
-    playerName: string;
-    totalScore: number;
     handleNameSubmit: (name: string, playerId: PlayerId) => void;
     updateScore: (scoreClass: string, playerId: PlayerId) => void;
     playerId: PlayerId;
     showNameForm: boolean;
     setShowNameForm: React.Dispatch<React.SetStateAction<boolean>>;
-    playerScores: PlayerScoresData; // Make sure this property is declared in the interface
+    playerScores: PlayerScoreType; // Make sure this property is declared in the interface
     deleteMeldItem: (playerId: PlayerId, scoreClass: string) => void;
  }
 
 const PlayerScore: React.FC<PlayerScoreProps> = ({ 
-    playerName, 
     playerScores, 
     handleNameSubmit, 
     updateScore, 
@@ -42,7 +39,7 @@ const PlayerScore: React.FC<PlayerScoreProps> = ({
             <Grid container spacing={1} style={{display: 'flex', alignItems: 'center'}}>
                 <Grid item xs={10}>
                 {!showNameForm && (
-                    <h3>{playerName}&apos;s Score: {playerScores[playerId].totalScore}</h3>
+                    <h3>{playerScores.name}&apos;s Score: {playerScores.totalScore}</h3>
                 )}
 
                 {showNameForm && (
@@ -67,10 +64,10 @@ const PlayerScore: React.FC<PlayerScoreProps> = ({
                     aria-controls="panel1-content"
                     id="panel1-header"
                     >
-                    <h3>Melds</h3>
+                    <div style={{marginLeft: '20px'}}><h3>Melds: &nbsp; &nbsp; {playerScores.meldPoints} </h3></div>
                     </AccordionSummary>
                     <AccordionDetails>
-                            {playerScores[playerId].scoreList.map((scoreItem, index) => (
+                            {playerScores.scoreList.map((scoreItem, index) => (
                             <div key={index} className="meld-item">
                                 <Grid item xs={6}>{scoreItem.class}</Grid>
                                 <Grid item xs={4} style={{textAlign: 'right'}}>{scoreItem.points}</Grid>

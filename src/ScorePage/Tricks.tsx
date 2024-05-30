@@ -28,14 +28,11 @@ interface TricksProps {
 const Tricks: React.FC<TricksProps> = ({ playerId, handleIncrement, handleDecrement, cardCounts, playerScores }) => {
     return (
         <div className="tricks">
-            <Grid container spacing={2}>
-                <Grid item xs={7}>
-                    <h3>Tricks</h3>
-                </Grid>
-                <Grid item xs={5}>
-                    Points: {playerScores.trickPoints}
-                </Grid>
-            </Grid>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                 <div>
+                    <h3>Tricks: &nbsp; &nbsp; {playerScores.trickPoints} </h3>
+                </div>
+            </div>
             {Object.keys(cardPoints).map((cardType) => (
                 <div key={cardType} style={{ margin: '10px' }}>
                     <Grid container spacing={2} alignItems="center">

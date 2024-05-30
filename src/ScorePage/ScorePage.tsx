@@ -4,34 +4,14 @@ import { Grid } from '@mui/material';
 import { PlayerScoresData, PlayerId } from './types';
 import Tricks from './Tricks';
 import Header from './Header';
+import { CLASS_POINTS, CARD_POINTS} from './points';
 
-const classPoints = {
-    'Exchange Dix': 10,
-    'Show Dix': 10,
-    'Royal Marriage': 40,
-    'Common Marriage': 20,
-    'Pinochle': 40,
-    'Double Pinochle': 300,
-    'Aces Around': 100,
-    'Kings Around': 80,
-    'Queens Around': 60,
-    'Jacks Around': 40,
-    'Royal Flush': 150,
-    'Double Flush': 1500,
-};
 
-const cardPoints = {
-    Aces: 11,
-    Tens: 10,
-    Kings: 4,
-    Queens: 3,
-    Jacks: 2,
-};
 
 function ScorePage() {
     const initialPlayerScores: PlayerScoresData = {
-        player1: { name: "Paula", totalScore: 0, trickPoints: 0, scoreList: [{ class: 'start', points: 0 }] },
-        player2: { name: "Joy", totalScore: 0, trickPoints: 0, scoreList: [{ class: 'start', points: 0 }] }
+        player1: { name: "Paula", totalScore: 0, meldPoints: 0, trickPoints: 0, scoreList: [{ class: 'start', points: 0 }] },
+        player2: { name: "Joy", totalScore: 0, meldPoints: 0, trickPoints: 0, scoreList: [{ class: 'start', points: 0 }] }
     };
 
     const initialCardCounts = {
@@ -56,31 +36,33 @@ function ScorePage() {
         }));
     };
 
-    const isValidClass = (key: any): key is keyof typeof classPoints => {
-        return key in classPoints;
+    const isValidClass = (key: any): key is keyof typeof CLASS_POINTS => {
+        return key in CLASS_POINTS;
     };
 
     const updateScore = (scoreClass: string, playerId: PlayerId) => {
         if (isValidClass(scoreClass)) {
             setPlayerScores(prevScores => {
                 const updatedScores = { ...prevScores };
+                const currentMeldPoints = updatedScores[playerId].meldPoints + CLASS_POINTS[scoreClass];
                 const currentList = [...updatedScores[playerId].scoreList];
                 const scoreIndex = currentList.findIndex(item => item.class === scoreClass);
 
                 if (scoreIndex !== -1) {
+
                     currentList[scoreIndex] = {
                         ...currentList[scoreIndex],
-                        points: currentList[scoreIndex].points + classPoints[scoreClass]
+                        points: currentList[scoreIndex].points + CLASS_POINTS[scoreClass]
                     };
                 } else {
-                    currentList.push({ class: scoreClass, points: classPoints[scoreClass] });
+                    currentList.push({ class: scoreClass, points: CLASS_POINTS[scoreClass] });
                 }
 
                 // Recalculate totalScore
                 const totalScore = currentList.reduce((total, item) => total + item.points, 0);
-
+                updatedScores[playerId].meldPoints = currentMeldPoints;
                 updatedScores[playerId].scoreList = currentList;
-                updatedScores[playerId].totalScore = totalScore;
+                updatedScores[playerId].totalScore = totalScore + updatedScores[playerId].trickPoints;
 
                 return updatedScores;
             });
@@ -105,11 +87,11 @@ function ScorePage() {
         });
     };
 
-    const handleIncrement = useCallback((cardType: keyof typeof cardPoints, playerId: PlayerId) => {
+    const handleIncrement = useCallback((cardType: keyof typeof CARD_POINTS, playerId: PlayerId) => {
         setPlayerScores(prevScores => {
             const updatedScores = { ...prevScores };
-            updatedScores[playerId].totalScore += cardPoints[cardType];
-            updatedScores[playerId].trickPoints += cardPoints[cardType];
+            updatedScores[playerId].totalScore += CARD_POINTS[cardType];
+            updatedScores[playerId].trickPoints += CARD_POINTS[cardType];
             return updatedScores;
         });
 
@@ -120,11 +102,11 @@ function ScorePage() {
         });
     }, []);
 
-    const handleDecrement = useCallback((cardType: keyof typeof cardPoints, playerId: PlayerId) => {
+    const handleDecrement = useCallback((cardType: keyof typeof CARD_POINTS, playerId: PlayerId) => {
         setPlayerScores(prevScores => {
             const updatedScores = { ...prevScores };
-            updatedScores[playerId].totalScore -= cardPoints[cardType];
-            updatedScores[playerId].trickPoints -= cardPoints[cardType];
+            updatedScores[playerId].totalScore -= CARD_POINTS[cardType];
+            updatedScores[playerId].trickPoints -= CARD_POINTS[cardType];
             return updatedScores;
         });
 
@@ -144,14 +126,12 @@ function ScorePage() {
                 <Grid container spacing={1}>
                     <Grid item xs={12} sm={6} md={6}>
                         <PlayerScore
-                            playerName={playerScores.player1.name}
-                            totalScore={playerScores.player1.totalScore}
                             handleNameSubmit={handleNameSubmit}
                             updateScore={updateScore}
                             playerId='player1'
                             showNameForm={showNameForm}
                             setShowNameForm={setShowNameForm}
-                            playerScores={playerScores}
+                            playerScores={playerScores.player1}
                             deleteMeldItem={deleteMeldItem}
                         />
                         <Tricks
@@ -164,14 +144,12 @@ function ScorePage() {
                     </Grid>
                     <Grid item xs={12} sm={6} md={6}>
                         <PlayerScore
-                            playerName={playerScores.player2.name}
-                            totalScore={playerScores.player2.totalScore}
                             handleNameSubmit={handleNameSubmit}
                             updateScore={updateScore}
                             playerId='player2'
                             showNameForm={showNameForm}
                             setShowNameForm={setShowNameForm}
-                            playerScores={playerScores}
+                            playerScores={playerScores.player2}
                             deleteMeldItem={deleteMeldItem}
                         />
                         <Tricks

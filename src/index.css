@@ -89,7 +89,9 @@ h3 {
   background-color: #915aa9;
   border: solid 1px #5601a1;
   border-radius: 10px;
-  padding: 20px;
+  padding-left: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   margin: 20px;
   box-shadow:  0 4px 8px rgba(0, 0, 0, 0.4);
   color: #ffffff;
